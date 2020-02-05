@@ -8,19 +8,22 @@ export class Sky extends React.Component {
 
 export class Tree extends React.Component {
   render() {
-    return <div className="tree"></div>;
+    const { column } = this.props;
+    return <div className="tree" style={column}></div>;
   }
 }
 
 export class TreeReversed extends React.Component {
   render() {
-    return <div className="treeReversed"></div>;
+    const { column } = this.props;
+    return <div className="treeReversed" style={column}></div>;
   }
 }
 
 export class Cloud extends React.Component {
   render() {
-    return <div className="cloud"></div>;
+    const { column } = this.props;
+    return <div className="cloud" style={column}></div>;
   }
 }
 
