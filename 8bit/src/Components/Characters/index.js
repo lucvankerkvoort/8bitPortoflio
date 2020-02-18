@@ -71,13 +71,12 @@ export class Character extends React.Component {
         // first function will be the changing of yoshi's avatar\
 
         this.changeAvatar("left");
-        this.movement();
+        this.movement("left");
 
         // we need to find out how to make the background move positions
       } else if (e.key === "ArrowRight") {
         this.changeAvatar("right");
-      } else if (!e.key) {
-        console.log("I run");
+        this.movement("right");
       } else {
         console.log("I jump");
       }
@@ -92,7 +91,6 @@ export class Character extends React.Component {
       elem.classList.add("flip");
     }
     let length = this.state.character.length;
-    console.log(this.state.character);
 
     if (this.state.index >= length - 1) {
       this.setState({ index: 1 });
@@ -102,8 +100,8 @@ export class Character extends React.Component {
     });
   };
 
-  movement = () => {
-    document.getElementById("char").classList.add("classname");
+  movement = direction => {
+    this.props.movement(direction);
   };
   handleKeyDown(event) {
     console.log(event.key);

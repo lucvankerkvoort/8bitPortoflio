@@ -25,6 +25,36 @@ class Home extends React.Component {
     }
     return arrColumn;
   }
+
+  movement = direction => {
+    let tree = document.getElementsByClassName("tree");
+    let treeReversed = document.getElementsByClassName("treeReversed");
+    let cloud = document.getElementsByClassName("cloud");
+    let ground = document.getElementsByClassName("ground");
+    let arrayOfElements = [tree, treeReversed, cloud];
+    let start;
+    let end;
+    arrayOfElements.map(element => {
+      let length = element.length;
+      for (let i = 0; i < length; i++) {
+        let specificElement = element[i].style.gridColumn;
+        let startNum = specificElement[0] + specificElement[1];
+        start = parseInt(startNum.trim());
+        let endNum =
+          specificElement[specificElement.length - 2] +
+          specificElement[specificElement.length - 1];
+        end = parseInt(endNum.trim());
+
+        console.log(start, end);
+        if (direction === "left") {
+          element[i].style.gridColumn = `${start + 1} / ${end + 1}`;
+        } else if (direction == "right") {
+          if (start != 1)
+            element[i].style.gridColumn = `${start - 1} / ${end - 1}`;
+        }
+      }
+    });
+  };
   render() {
     return (
       <div className="home">
@@ -48,13 +78,9 @@ class Home extends React.Component {
           };
           return <Cloud column={style} />;
         })}
-        <Character column="6/7" />
+        <Character column="6/7" movement={this.movement} />
       </div>
     );
-    // I have to create the following components
-    // 1. sky
-    // 2. land
-    // 3. characters
   }
 }
 
