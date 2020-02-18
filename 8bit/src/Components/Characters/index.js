@@ -51,6 +51,60 @@ export const yoshi = [
 ];
 
 export class Character extends React.Component {
+  state = {
+    character: yoshi,
+    index: 0
+  };
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKey);
+  }
+
+  handleKey = e => {
+    let keys = {
+      ArrowRight: true,
+      ArrowLeft: true,
+      ArrowUp: true
+    };
+
+    if (keys[e.key]) {
+      if (e.key === "ArrowLeft") {
+        // first function will be the changing of yoshi's avatar\
+
+        this.changeAvatar("left");
+        this.movement();
+
+        // we need to find out how to make the background move positions
+      } else if (e.key === "ArrowRight") {
+        this.changeAvatar("right");
+      } else if (!e.key) {
+        console.log("I run");
+      } else {
+        console.log("I jump");
+      }
+    }
+  };
+
+  changeAvatar = direction => {
+    let elem = document.getElementById("char");
+    if (direction == "right") {
+      elem.classList.remove("flip");
+    } else {
+      elem.classList.add("flip");
+    }
+    let length = this.state.character.length;
+    console.log(this.state.character);
+
+    if (this.state.index >= length - 1) {
+      this.setState({ index: 1 });
+    }
+    this.setState({
+      index: this.state.index + 1
+    });
+  };
+
+  movement = () => {
+    document.getElementById("char").classList.add("classname");
+  };
   handleKeyDown(event) {
     console.log(event.key);
     console.log("i Run");
@@ -58,11 +112,9 @@ export class Character extends React.Component {
   render() {
     const { column } = this.props;
     let style = {
-      background: `url(${yoshi[2]})`,
-      backgroundPosition: "center",
-      backgroundSize: "cover",
+      background: `url(${this.state.character[this.state.index]})`,
       gridColumn: column
     };
-    return <div id={character} className="character" style={style}></div>;
+    return <div id="char" className="character" style={style}></div>;
   }
 }

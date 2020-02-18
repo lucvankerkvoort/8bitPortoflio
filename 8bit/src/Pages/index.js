@@ -9,28 +9,6 @@ import {
 import { yoshi, megaMan, metroid, Character } from "../Components/Characters";
 
 class Home extends React.Component {
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleKey);
-  }
-
-  handleKey(e) {
-    let keys = {
-      ArrowRight: true,
-      ArrowLeft: true,
-      ArrowUp: true
-    };
-    let element = document.getElementById;
-    if (keys[e.key]) {
-      if (e.key === "ArrowLeft") {
-        console.log("I run left");
-      } else if (e.key === "ArrowRight") {
-        console.log("I run right");
-      } else {
-        console.log("I jump");
-      }
-    }
-  }
-
   spacer(start, end, repetition) {
     let arrColumn = [];
 
